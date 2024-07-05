@@ -3,7 +3,14 @@ import React from "react";
 import { useSession, signIn, signOut } from "next-auth/react"
 
 function Page() {
-  return (
+    const { data: session } = useSession()
+    if(session) {
+      return <>
+        Signed in as {session.user.email} <br/>
+        <button onClick={() => signOut()}>Sign out</button>
+      </>
+    }
+    return (
     <div className="text-white py-14 container mx-auto">
       <h1 className="text-center font-bold text-3xl">
         Login To Use This Platform
@@ -20,7 +27,7 @@ function Page() {
             <g
               id="Icons"
               stroke="none"
-              stroke-width="1"
+              strokeWidth="1"
               fill="none"
               fill-rule="evenodd"
             >
@@ -72,7 +79,7 @@ function Page() {
             <g
               id="Icons"
               stroke="none"
-              stroke-width="1"
+              strokeWidth="1"
               fill="none"
               fill-rule="evenodd"
             >
@@ -102,7 +109,7 @@ function Page() {
             <g
               id="Icons"
               stroke="none"
-              stroke-width="1"
+              strokeWidth="1"
               fill="none"
               fill-rule="evenodd"
             >
@@ -123,7 +130,7 @@ function Page() {
         </button>
 
 
-        <button className="flex items-center bg-white border border-gray-300 rounded-lg shadow-md max-w-xs px-6 py-2 text-sm font-medium text-gray-800 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+        <button  onClick={()=>{signIn("github")}} className="flex items-center bg-white border border-gray-300 rounded-lg shadow-md max-w-xs px-6 py-2 text-sm font-medium text-gray-800 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
           <svg
             className="h-6 w-6 mr-2"
             xmlns="http://www.w3.org/2000/svg"
@@ -134,7 +141,7 @@ function Page() {
             <g
               id="team-collaboration/version-control/github"
               stroke="none"
-              stroke-width="1"
+              strokeWidth="1"
               fill="none"
               fill-rule="evenodd"
             >
@@ -146,7 +153,7 @@ function Page() {
                 <rect
                   id="mask"
                   stroke="#000000"
-                  stroke-width="2"
+                  strokeWidth="2"
                   fill="#000000"
                   x="-1"
                   y="-1"
@@ -177,7 +184,7 @@ function Page() {
             <g
               id="Page-1"
               stroke="none"
-              stroke-width="1"
+              strokeWidth="1"
               fill="none"
               fill-rule="evenodd"
             >
