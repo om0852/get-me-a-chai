@@ -7,9 +7,9 @@ import User from "@/app/models/user"
 import Razorpay from "razorpay"
 
 
-export const initiate =async (amount,to_username,paymentform)=>{
+export const initiate =async (amount,to_user,paymentform)=>{
     await connectDB()
-    var instance = new Razorpay({ key_id: process.env.KEY_ID, key_secret: process.env.KEY_SECRET })
+    var instance = new Razorpay({ key_id: process.env.NEXT_PUBLIC_RKEY_ID, key_secret: process.env.RKEY_SECRET })
 
 instance.orders.create({
 amount: 50000,
@@ -26,5 +26,6 @@ let options={
 }
 let x =await instance.orders.create(options);
 //create a payment object whiuch shows a pending payment inth database
-await Payment.create({old:x.id,amount:amount,to_username:to_username,name:paymentform.name,message:paymentform.message})
+await Payment.create({oid:x.id,amount:amount,to_user:to_user,name:paymentform.name,message:paymentform.message})
+return x
 }
