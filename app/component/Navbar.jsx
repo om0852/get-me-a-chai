@@ -12,7 +12,7 @@ console.log(showDropDown)
     const router =useRouter();
     const { data: session } = useSession()
     if(session) {
-        router.push(`/${session.user.name}`)
+        // router.push(`/${session.user.name}`)
     }
   return (
     <nav  className="bg-black text-white flex justify-between px-6 h-16 items-center background:radial-gradient(125%_125%_at_50%_10%,#00f_40%,#63t_100%)">
@@ -47,11 +47,11 @@ console.log(showDropDown)
         <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
       </li>
       <li>
-        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Your Page</a>
+        <Link href={`${session.user.name}`} class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Your Page</Link>
       </li>
     </ul>
     <div class="py-2">
-      <a href="#" onClick={() => {signOut() ;router.push("/login")}} class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
+      <button  onClick={() => {signOut() ;router.push("/login")}} class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</button>
     </div>
 </div>
 
