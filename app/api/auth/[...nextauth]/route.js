@@ -6,7 +6,7 @@ import EmailProvider from 'next-auth/providers/email'
 import GitHubProvider from "next-auth/providers/github";
 import User from '@/app/models/user'
 import mongoose from 'mongoose'
-import connectDb from "@/app/db/db"
+import connectDB from "@/app/db/db"
 
 export const authoptions= NextAuth({
   providers: [
@@ -39,7 +39,7 @@ export const authoptions= NextAuth({
         try {
           
           await connectDB();
-          let currentUser = await User.findOne({ email: email });
+          let currentUser = await User.findOne({ email: user.email });
           if (!currentUser) {
             const newUser = new User({
               email: user.email,

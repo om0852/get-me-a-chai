@@ -4,18 +4,29 @@ import React, { useEffect, useState } from 'react'
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { fetchpayments,fetchUser, initiate } from '@/actions/useraction';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useSearchParams } from 'next/navigation';
 function PaymentPage({ params }) {
   const router = useRouter();
   const { data: session } = useSession();
-  
+  const searchParams=useSearchParams();
   useEffect(() => {
     if (!session) {
     //   router.push(`/login`);
     }
   }, [session, router]);
-  
-  const [paymentForm, setPaymentForm] = useState({ name: "", message: "", amount: 100 });
+  useEffect(()=>{
+if(searchParams.get("payment")){
+  toast.success("Payment Has Done!", {
+    position: "top-center",
+    autoClose:2000,
+    theme:"light"
+  });
+}
+  },[])
+  const [paymentForm, setPaymentForm] = useState({ name: "", message: "", amount: 1 });
+  const [buttonDisable,setButtonDisable]=useState(false);
   const [currentUser,setCurrentUser]=useState({});
   const [payments,setPayments]=useState([])
   const handleFormData = (e) => {
@@ -28,21 +39,34 @@ function PaymentPage({ params }) {
     let d= await fetchpayments(username);
     setPayments(d)
   }
+  useEffect(()=>{
+
+    if(paymentForm.name!="" && paymentForm.message!="" && (paymentForm.amount>0 && paymentForm.amount<10000)){
+      setButtonDisable(true)
+        }
+        else{
+          setButtonDisable(false)
+        }
+      
+  },[paymentForm])
 useEffect(()=>{
   getData(params.username)
 },[])
   const pay = async (amount) => {
-    if (!amount || isNaN(amount) || amount <= 0) {
-      alert('Please enter a valid amount');
+    if (!amount || isNaN(amount) || amount <= 1) {
+      alert('Please enter a valid amount or amount greater than 0');
       return;
+    }
+    if((paymentForm.amount>0 && paymentForm.amount<10000)){
+// alert("amount must be greater than ")
     }
 
     try {
-      let response = await initiate(amount, params.username, paymentForm);
+      let response = await initiate(amount, params.username, paymentForm,session.user.email);
       let orderId = response.id;
   
       var options = {
-        "key": process.env.KEY_ID, // Ensure this environment variable is set
+        "key": currentUser.r_id, // Ensure this environment variable is set
         "amount": amount * 100, // Amount should be in the smallest currency unit (paise for INR)
         "currency": "INR",
         "name": "GET ME A TEA",
@@ -75,6 +99,8 @@ useEffect(()=>{
     <>
       <Script src="https://checkout.razorpay.com/v1/checkout.js"></Script>
       <div className="cover w-full bg-red-500 relative">
+      <ToastContainer />
+
         <img
           src="https://marketplace.canva.com/EAE2cQaUHVA/1/0/1600w/canva-black-minimal-motivation-quote-linkedin-banner-HoRi-2buBWk.jpg"
           className="object-cover w-full h-[350px]"
@@ -96,6 +122,7 @@ useEffect(()=>{
       <div className="flex w-[100%] h-[80vh] justify-center ">
         <div className="w-[40%] bg-purple-500 mx-12 h-[80%] text-white">
           <div className="my-10 text-center font-bold">Supporter</div>
+          {payments.length==0 && "No Payment Found"}
           {payments && payments.map((data,index)=>{
 return(
   <div key={index} className="mx-14">{data.name} Donate {data.amount} rupess With message {data.message} </div>
@@ -140,7 +167,7 @@ return(
                 />
               </div>
             </div>
-            <button
+            <button disabled={!buttonDisable}
               onClick={() => pay(Number.parseInt(paymentForm.amount)*100)}
               type="button"
               className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"

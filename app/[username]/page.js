@@ -1,20 +1,28 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSession, signIn, signOut } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { notFound, useRouter } from "next/navigation";
 import PaymentPage from "../component/PaymentPage";
+import { fetchUserByName } from "@/actions/useraction";
+import { Elsie_Swash_Caps } from "next/font/google";
 
 function page({ params }) {
   const router = useRouter();
   const { data: session } = useSession();
-  if (!session) {
-    // router.push(`/login`);
+  const [state,setState]=useState(false);
+
+  const checkuser=async()=>{
+      const d= await fetchUserByName(params.username)
+setState(d)
   }
-  // const [paymentform,setPaymentform]
+useEffect(()=>{
+  checkuser();
+},[])
   return (
     <>
-    <PaymentPage params={params}/>
-    </>
+{  state==true?  <PaymentPage params={params}/>:<div className="flex justify-center items-center w-[100%] h-[80vh]"><h1 className="text-white">User Not Found</h1></div>
+
+}    </>
   );
 }
 
