@@ -120,7 +120,7 @@ useEffect(()=>{
         {session && session.user.name}
       </div>
       <div className="flex w-[100%] h-[80vh] justify-center ">
-        <div className="w-[40%] bg-purple-500 mx-12 h-[80%] text-white">
+        <div className="w-[40%] bg-purple-500 mx-12 h-[80%] text-white" style={{overflowY:"scroll",scrollbarWidth:"none"}}>
           <div className="my-10 text-center font-bold">Supporter</div>
           {payments.length==0 && "No Payment Found"}
           {payments && payments.map((data,index)=>{
