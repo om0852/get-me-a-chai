@@ -1,7 +1,25 @@
+"use client"
 import Image from "next/image";
 import teaLogo from "@/app/images/tea-logo.png"
 import coinImg from "@/app/images/coin-img.jpg"
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import { useSession, signIn, signOut } from "next-auth/react"
+
+import { fetchUser } from "@/actions/useraction";
 export default function Home() {
+  const { data: session } = useSession()
+
+  const [userData,setUserData]=useState(null)
+  const getData=async()=>{
+      
+    let u=await fetchUser(session?.user.email);
+    setUserData(u)
+  }
+  useEffect(()=>{
+getData();
+
+  },[])
   return (
     <>
   <div className="flex justify-center flex-col text-white h-[44vh] items-center gap-4">
@@ -13,7 +31,7 @@ export default function Home() {
  </p>
  </div>
    <div className="">
-   <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Start Here</button>
+   <Link href={`/${userData?.username}`} type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Start Here</Link>
    <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Read More</button>
 
    </div>
