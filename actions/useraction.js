@@ -8,7 +8,7 @@ import Razorpay from "razorpay";
 export const initiate = async (amount, to_user, paymentform, email) => {
   await connectDB();
   let u = await User.findOne({ email: email });
-
+console.log(email,u.r_id)
   var instance = new Razorpay({
     key_id: u.r_id,
     key_secret: u.r_secret,

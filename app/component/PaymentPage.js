@@ -33,7 +33,7 @@ if(searchParams.get("payment")){
     setPaymentForm({ ...paymentForm, [e.target.name]: e.target.value });
   }
   const getData=async(username)=>{
-    let u =await fetchUser(username)
+    let u =await fetchUser(session.user.email)
     console.log(u)
     setCurrentUser(u);
     let d= await fetchpayments(username);
@@ -64,7 +64,6 @@ useEffect(()=>{
     try {
       let response = await initiate(amount, params.username, paymentForm,session.user.email);
       let orderId = response.id;
-  
       var options = {
         "key": currentUser.r_id, // Ensure this environment variable is set
         "amount": amount * 100, // Amount should be in the smallest currency unit (paise for INR)
@@ -106,7 +105,7 @@ useEffect(()=>{
           className="object-cover w-full h-[350px]"
           alt="Cover"
         />
-        <div className="absolute -bottom-10 right-[47%]">
+        <div className="absolute -bottom-10 right-[47%] text-white gap-3">
           <img
             className="rounded-full"
             width={85}
@@ -114,10 +113,17 @@ useEffect(()=>{
             src={session && session.user.image}
             alt="User"
           />
+          <div className='my-1'>
+               
+                  {session && session.user.name}
+          </div>
+          <div className='my-1'>
+{payments.length} has raised rupess{payments.reduce((a,b)=>a+Number.parseInt(b.amount),0)}               
+          </div>
+
         </div>
       </div>
       <div className="flex justify-center items-center my-20 text-white font-bold ">
-        {session && session.user.name}
       </div>
       <div className="flex w-[100%] h-[80vh] justify-center ">
         <div className="w-[40%] bg-purple-500 mx-12 h-[80%] text-white" style={{overflowY:"scroll",scrollbarWidth:"none"}}>
