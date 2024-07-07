@@ -29,3 +29,33 @@ let x =await instance.orders.create(options);
 await Payment.create({oid:x.id,amount:amount,to_user:to_user,name:paymentform.name,message:paymentform.message})
 return x
 }
+
+
+export const fetchUser=async(username)=>{
+    await connectDB();
+    let u =await User.findOne({username:username});
+    let user = u.toObject({flattenObjectIds:true})
+    return user
+}
+
+export const fetchpayments =async (username)=>{
+    await connectDB();
+    //find allpayment sortedd by descresing order of amount
+    let p = await Payment.find({to_user:username}).sort({amount:-1});
+        return p
+
+
+}
+export const udateUser=async(data,oldusername)=>{
+    await connectDB();
+    let ndata=Object.fromEntries(data)
+
+    if(oldusername!==ndata.username){;
+    let u1 =await User.findOne({username:oldusername});
+if(u){
+    return {error:"Username already exists"}
+}
+
+}
+await User.updateOne({email:ndata.email},ndata)
+}

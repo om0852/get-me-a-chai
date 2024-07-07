@@ -3,7 +3,7 @@ import Script from 'next/script'
 import React, { useEffect, useState } from 'react'
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { initiate } from '@/actions/useraction';
+import { fetchpayments,fetchUser, initiate } from '@/actions/useraction';
 
 function PaymentPage({ params }) {
   const router = useRouter();
@@ -11,16 +11,26 @@ function PaymentPage({ params }) {
   
   useEffect(() => {
     if (!session) {
-      router.push(`/login`);
+    //   router.push(`/login`);
     }
   }, [session, router]);
   
-  const [paymentForm, setPaymentForm] = useState({ name: "", message: "", amount: "" });
-  
+  const [paymentForm, setPaymentForm] = useState({ name: "", message: "", amount: 100 });
+  const [currentUser,setCurrentUser]=useState({});
+  const [payments,setPayments]=useState([])
   const handleFormData = (e) => {
     setPaymentForm({ ...paymentForm, [e.target.name]: e.target.value });
   }
-  
+  const getData=async(username)=>{
+    let u =await fetchUser(username)
+    console.log(u)
+    setCurrentUser(u);
+    let d= await fetchpayments(username);
+    setPayments(d)
+  }
+useEffect(()=>{
+  getData(params.username)
+},[])
   const pay = async (amount) => {
     if (!amount || isNaN(amount) || amount <= 0) {
       alert('Please enter a valid amount');
@@ -86,12 +96,11 @@ function PaymentPage({ params }) {
       <div className="flex w-[100%] h-[80vh] justify-center ">
         <div className="w-[40%] bg-purple-500 mx-12 h-[80%] text-white">
           <div className="my-10 text-center font-bold">Supporter</div>
-          <div className="mx-14">om Donate 100 rupess With message I am from earth</div>
-          <div className="mx-14">om Donate 100 rupess With message I am from earth</div>
-          <div className="mx-14">om Donate 100 rupess With message I am from earth</div>
-          <div className="mx-14">om Donate 100 rupess With message I am from earth</div>
-          <div className="mx-14">om Donate 100 rupess With message I am from earth</div>
-          <div className="mx-14">om Donate 100 rupess With message I am from earth</div>
+          {payments && payments.map((data,index)=>{
+return(
+  <div key={index} className="mx-14">{data.name} Donate {data.amount} rupess With message {data.message} </div>
+) 
+          })}
         </div>
         <div className="w-[40%] bg-purple-500 h-[80%] text-white">
           <div className="w-[90%] m-auto">
@@ -132,7 +141,7 @@ function PaymentPage({ params }) {
               </div>
             </div>
             <button
-              onClick={() => pay(paymentForm.amount)}
+              onClick={() => pay(Number.parseInt(paymentForm.amount)*100)}
               type="button"
               className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
