@@ -3,3 +3,11 @@
 @tailwind utilities;
 
 
+@media (min-height: 720px) {
+.grid-container{
+    display: grid;
+    row-gap: 20px;
+    padding-bottom: 2vh;
+}
+
+}

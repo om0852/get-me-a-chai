@@ -33,7 +33,7 @@ if(searchParams.get("payment")){
     setPaymentForm({ ...paymentForm, [e.target.name]: e.target.value });
   }
   const getData=async(username)=>{
-    let u =await fetchUser(session.user.email)
+    let u =await fetchUser(session?.user.email)
     console.log(u)
     setCurrentUser(u);
     let d= await fetchpayments(username);
@@ -105,7 +105,7 @@ useEffect(()=>{
           className="object-cover w-full h-[350px]"
           alt="Cover"
         />
-        <div className="absolute -bottom-10 right-[47%] text-white gap-3">
+        <div className="absolute -bottom-25 right-[50%] text-white gap-3 w-[40vh]" style={{display:"grid",placeItems:"center",bottom:"-20vh",left:"40%"}}>
           <img
             className="rounded-full"
             width={85}

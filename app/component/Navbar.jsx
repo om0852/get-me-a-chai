@@ -1,4 +1,5 @@
 "use client"
+import "@/app/globals.css"
 import React, { useEffect, useState } from "react";
 import teaLogo from "@/app/images/tea-logo.png"
 import Link from "next/link";
@@ -27,7 +28,7 @@ console.log(showDropDown)
       handleuserdata();
     },[session])
   return (
-    <nav  className="bg-black text-white flex justify-between px-6 h-16 items-center background:radial-gradient(125%_125%_at_50%_10%,#00f_40%,#63t_100%)">
+    <nav  className=" bg-black navbar text-white flex justify-between px-6 h-16 items-center background:radial-gradient(125%_125%_at_50%_10%,#00f_40%,#63t_100%)">
       <Link href={"/"} className="logo font-bold text-lg flex"><span className="mx-6"><img src={teaLogo.src} width={33}/></span>GetMeaChai</Link>
       {/* <ul className="flex justify-between gap-4">
         <li>Home</li>
@@ -41,7 +42,7 @@ console.log(showDropDown)
       </Link>
 }{         session && 
 <div >
-<button onClick={()=>setShowDropDown(true)} id="dropdownInformationButton" data-dropdown-toggle="dropdownInformation" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">{userData?.username} <svg className="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+<button onClick={()=>setShowDropDown(true)} id="dropdownInformationButton" data-dropdown-toggle="dropdownInformation" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800  " style={{overflow:"hidden"}} type="button">{userData?.username} <svg className="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4"/>
 </svg>
 </button>

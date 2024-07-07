@@ -42,7 +42,7 @@ getData();
     <h1 className="text-center my-5 font-bold text-2xl" >
 Yours Fans can buy a Chai
     </h1>
-    <div className="flex justify-around align-center items-center">
+    <div className="flex justify-around align-center items-center grid-container">
       <div className="item space-y-3" style={{display:"grid",placeItems:"center"}}><div className="mx-auto"><img className="mx-auto mb-2" src={teaLogo.src} width={44}/></div>Fans want to help you<p className="mt-2">Your fans are available to help you</p></div>
       <div className="item space-y-3" style={{display:"grid",placeItems:"center"}}><div className=""><img className="mx-auto mb-2" src={coinImg.src} width={44}/></div>Fund Yourself <p className="mt-2">Your fans are available to help you</p></div>
       <div className="item space-y-3" style={{display:"grid",placeItems:"center"}}><div className=""><img className="mx-auto mb-2" src={teaLogo.src} width={44}/></div>Fans want to help you <p className="mt-2">Your fans are available to help you</p></div>
@@ -54,7 +54,7 @@ Yours Fans can buy a Chai
     <h1 className="text-center my-5 font-bold text-2xl" >
 Learn More About Us
     </h1>
-    <div className="flex justify-around align-center items-center">
+    <div className="flex justify-around align-center items-center grid-container">
       <div className="item space-y-3" style={{display:"grid",placeItems:"center"}}><div className="mx-auto"><img className="mx-auto mb-2" src={teaLogo.src} width={44}/></div>Fans want to help you<p className="mt-2">Your fans are available to help you</p></div>
       <div className="item space-y-3" style={{display:"grid",placeItems:"center"}}><div className=""><img className="mx-auto mb-2" src={coinImg.src} width={44}/></div>Fund Yourself <p className="mt-2">Your fans are available to help you</p></div>
       <div className="item space-y-3" style={{display:"grid",placeItems:"center"}}><div className=""><img className="mx-auto mb-2" src={teaLogo.src} width={44}/></div>Fans want to help you <p className="mt-2">Your fans are available to help you</p></div>
