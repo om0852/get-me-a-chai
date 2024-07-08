@@ -16,7 +16,7 @@ function PaymentPage({ params }) {
 
   useEffect(() => {
     if (!session) {
-      router.push(`/login`);
+      // router.push(`/login`);
     }
   }, [session, router]);
   useEffect(()=>{
@@ -106,7 +106,7 @@ useEffect(()=>{
       {loaderState&& <Loader/>}
 
         <img
-          src="https://marketplace.canva.com/EAE2cQaUHVA/1/0/1600w/canva-black-minimal-motivation-quote-linkedin-banner-HoRi-2buBWk.jpg"
+          src={currentUser&&currentUser.cover_picture}
           className="w-full max-md:h-[350px] h-[220px]"
           alt="Cover"
         />
@@ -115,12 +115,12 @@ useEffect(()=>{
             className="rounded-full"
             width={85}
             height={85}
-            src={session && session.user.image}
+            src={currentUser?.profile_picture}
             alt="User"
           />
           <div className='my-1'>
                
-                  {session && session.user.name}
+                  {currentUser?.username}
           </div>
           <div className='my-1'>
 {payments.length} has raised rupess{payments.reduce((a,b)=>a+Number.parseInt(b.amount),0)}               

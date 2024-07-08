@@ -18,13 +18,14 @@ const router=useRouter()
   const getData=async()=>{
       
     let u=await fetchUser(session?.user.email);
+    if(!u){
+      router.push(`/login`);
+    }
     setUserData(u)
     setLoaderState(false)
   }
   useEffect(()=>{
-    if(!session){
-router.push("login")
-    }
+    
 getData();
 
   },[])

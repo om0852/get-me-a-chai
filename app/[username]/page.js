@@ -15,6 +15,9 @@ function Page({ params }) {
   const [loaderState,setLoaderState]=useState(false);
   const checkuser=async()=>{
       const d= await fetchUserByName(params.username)
+      if(!d){
+
+      }
 setState(d)
 setLoaderState(false)
   }

@@ -44,6 +44,7 @@ export const authoptions= NextAuth({
             const newUser = new User({
               email: user.email,
               username:user.email.split('@')[0],
+              profile_picture:user.image
             });
             await newUser.save();
             user.name = newUser.username;

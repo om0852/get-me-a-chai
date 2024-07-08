@@ -11,13 +11,10 @@ function Page() {
 
     const { data: session } = useSession()
     useEffect(()=>{
-      if(!session) {
-        router.push("/login");
-    }
+      
     },[])
     const [form,setForm]=useState({
       name:"",
-      email:"",
       profile_picture:"",
       cover_picture:"",
       username:"",
@@ -43,6 +40,10 @@ if(session){
       
       let u=await fetchUser(session?.user.email);
       setForm(u)
+      if(!u){
+        router.push(`/login`);
+      }
+
       setLoaderState(false)
     }
     const handleSubmit=async()=>{
@@ -56,10 +57,6 @@ if(session){
     <div className="mb-2 text-white">
       <label for="base-input" className="block mb-2 text-sm font-medium text-white-900 dark:text-white">Name</label>
       <input onChange={handleSetForm} value={form.name} type="text" name='name' id="base-input" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
-  </div>
-    <div className="mb-2 text-white">
-      <label for="base-input" className="block mb-2 text-sm font-medium text-white-900 dark:text-white">Email</label>
-      <input onChange={handleSetForm} value={form.email} type="text" name='email' id="base-input" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
   </div>
     <div className="mb-2 text-white">
       <label for="base-input" className="block mb-2 text-sm font-medium text-white-900 dark:text-white">Username</label>
