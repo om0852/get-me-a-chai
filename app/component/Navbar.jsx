@@ -29,7 +29,7 @@ console.log(showDropDown)
     },[session])
   return (
     <nav  className=" bg-black navbar text-white flex justify-between max-md:px-6 h-16 items-center max-md:background:radial-gradient(125%_125%_at_50%_10%,#00f_40%,#63t_100%) bg-gray-800	">
-      <Link href={"/"} className="logo font-bold max-md:text-lg flex"><span className="max-md:mx-6 mx-2n"><img src={teaLogo.src} width={33}/></span>GetMeaChai</Link>
+      <Link href={"/"} className="logo font-bold max-md:text-lg items-center flex"><span className="max-md:mx-6 mx-2n"><img src={teaLogo.src} width={55}/></span>GetMeaChai</Link>
       {/* <ul className="flex justify-between gap-4">
         <li>Home</li>
         <li>About</li>

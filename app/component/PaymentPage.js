@@ -7,10 +7,13 @@ import { fetchpayments,fetchUser, initiate } from '@/actions/useraction';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useSearchParams } from 'next/navigation';
+import Loader from './Loader';
 function PaymentPage({ params }) {
   const router = useRouter();
   const { data: session } = useSession();
   const searchParams=useSearchParams();
+  const [loaderState,setLoaderState]=useState(true);
+
   useEffect(() => {
     if (!session) {
       router.push(`/login`);
@@ -38,6 +41,7 @@ if(searchParams.get("payment")){
     setCurrentUser(u);
     let d= await fetchpayments(username);
     setPayments(d)
+    setLoaderState(false)
   }
   useEffect(()=>{
 
@@ -99,13 +103,14 @@ useEffect(()=>{
       <Script src="https://checkout.razorpay.com/v1/checkout.js"></Script>
       <div className="cover w-full bg-red-500 relative">
       <ToastContainer />
+      {loaderState&& <Loader/>}
 
         <img
           src="https://marketplace.canva.com/EAE2cQaUHVA/1/0/1600w/canva-black-minimal-motivation-quote-linkedin-banner-HoRi-2buBWk.jpg"
           className="w-full max-md:h-[350px] h-[220px]"
           alt="Cover"
         />
-        <div className="absolute max-md:-bottom-25 max-md:right-[50%] text-white gap-3 w-[40vh] -bottom-[15vh] left-[8%]" style={{display:"grid",placeItems:"center",bottom:"-20vh",left:"40%"}}>
+        <div className="absolute max-md:-bottom-25 max-md:right-[50%] text-white gap-3 w-[40vh] -bottom-[15vh] left-[8%]" style={{display:"grid",placeItems:"center",bottom:"-20vh",left:"15%%"}}>
           <img
             className="rounded-full"
             width={85}
@@ -126,16 +131,16 @@ useEffect(()=>{
       <div className="flex justify-center items-center my-20 text-white font-bold ">
       </div>
       <div className="max-md:flex grid w-[100%] h-[80vh] justify-center place-items-center	 ">
-        <div className="max-md:w-[40%] w-[80%] bg-purple-500 mx-12 h-[80%] text-white" style={{overflowY:"scroll",scrollbarWidth:"none"}}>
+        <div className="max-md:w-[40%] w-[140%] bg-purple-500 mx-2 h-[80%] text-white" style={{overflowY:"scroll",scrollbarWidth:"none"}}>
           <div className="my-10 text-center font-bold">Supporter</div>
-          {payments.length==0 && "No Payment Found"}
+          {payments.length==0 && <p className='ml-4'>No Payment Found</p>}
           {payments && payments.map((data,index)=>{
 return(
   <div key={index} className="mx-14">{data.name} Donate {data.amount} rupess With message {data.message} </div>
 ) 
           })}
         </div>
-        <div className="max-md:w-[40%] w-[80%] bg-purple-500 h-[80%] text-white">
+        <div className="max-md:w-[40%] w-[140%] bg-purple-500 h-[90%] text-white">
           <div className="w-[90%] m-auto">
             <div className="gap-10">
               <div className="my-4 mt-8 font-bold text-1xl">Make a Payment</div>

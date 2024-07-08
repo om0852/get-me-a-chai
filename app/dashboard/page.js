@@ -3,9 +3,12 @@ import React, { useEffect, useState } from 'react'
 import { useSession, signIn, signOut } from "next-auth/react"
 import { useRouter } from "next/navigation";
 import { fetchUser, updateUser } from '@/actions/useraction';
+import Loader from '../component/Loader';
 
 function Page() {
     const router =useRouter();
+    const [loaderState,setLoaderState]=useState(true);
+
     const { data: session } = useSession()
     useEffect(()=>{
       if(!session) {
@@ -40,13 +43,14 @@ if(session){
       
       let u=await fetchUser(session?.user.email);
       setForm(u)
+      setLoaderState(false)
     }
     const handleSubmit=async()=>{
       let a =await updateUser(form,session.user.email);
-      alert("profile update")
     }
   return (
     <div className='text-white relative top-10'>
+      {loaderState&& <Loader/>}
     <div className='text-center font-bold text-2xl'> Welcome to your Dashboard</div>
     <form className='max-md:w-[50%] w-[85%] p-10 m-auto'>
     <div className="mb-2 text-white">

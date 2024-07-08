@@ -9,14 +9,17 @@ import { useSession, signIn, signOut } from "next-auth/react"
 import { fetchUser } from "@/actions/useraction";
 import Head from "next/head";
 import { useRouter } from "next/navigation";
+import Loader from "./component/Loader";
 export default function Home() {
   const { data: session } = useSession()
 const router=useRouter()
   const [userData,setUserData]=useState(null)
+  const [loaderState,setLoaderState]=useState(true);
   const getData=async()=>{
       
     let u=await fetchUser(session?.user.email);
     setUserData(u)
+    setLoaderState(false)
   }
   useEffect(()=>{
     if(!session){
@@ -32,8 +35,9 @@ getData();
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </Head>
-  <div className="flex justify-center flex-col text-white h-[44vh] items-center gap-4 ">
-   <div className="font-bold text-3xl flex justify-center align-center">Buy Me a Chai<span className="mx-2"><img src={teaLogo.src} width={44}/></span></div>
+{loaderState&& <Loader/>
+}  <div className="flex justify-center flex-col text-white h-[44vh] items-center gap-4 ">
+   <div className="font-bold text-3xl flex justify-center align-center">Buy Me a Chai<span className="mx-2"><img src={teaLogo.src} width={66}/></span></div>
    <div>
 
 <p className="w-[70%] m-auto text-center">
