@@ -47,7 +47,7 @@ if(session){
   return (
     <div className='text-white relative top-10'>
     <div className='text-center font-bold text-2xl'> Welcome to your Dashboard</div>
-    <form className='w-[50%] p-10 m-auto'>
+    <form className='max-md:w-[50%] w-[85%] p-10 m-auto'>
     <div className="mb-2 text-white">
       <label for="base-input" className="block mb-2 text-sm font-medium text-white-900 dark:text-white">Name</label>
       <input onChange={handleSetForm} value={form.name} type="text" name='name' id="base-input" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>

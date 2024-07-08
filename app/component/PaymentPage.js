@@ -102,10 +102,10 @@ useEffect(()=>{
 
         <img
           src="https://marketplace.canva.com/EAE2cQaUHVA/1/0/1600w/canva-black-minimal-motivation-quote-linkedin-banner-HoRi-2buBWk.jpg"
-          className="object-cover w-full h-[350px]"
+          className="w-full max-md:h-[350px] h-[220px]"
           alt="Cover"
         />
-        <div className="absolute -bottom-25 right-[50%] text-white gap-3 w-[40vh]" style={{display:"grid",placeItems:"center",bottom:"-20vh",left:"40%"}}>
+        <div className="absolute max-md:-bottom-25 max-md:right-[50%] text-white gap-3 w-[40vh] -bottom-[15vh] left-[8%]" style={{display:"grid",placeItems:"center",bottom:"-20vh",left:"40%"}}>
           <img
             className="rounded-full"
             width={85}
@@ -125,8 +125,8 @@ useEffect(()=>{
       </div>
       <div className="flex justify-center items-center my-20 text-white font-bold ">
       </div>
-      <div className="flex w-[100%] h-[80vh] justify-center ">
-        <div className="w-[40%] bg-purple-500 mx-12 h-[80%] text-white" style={{overflowY:"scroll",scrollbarWidth:"none"}}>
+      <div className="max-md:flex grid w-[100%] h-[80vh] justify-center place-items-center	 ">
+        <div className="max-md:w-[40%] w-[80%] bg-purple-500 mx-12 h-[80%] text-white" style={{overflowY:"scroll",scrollbarWidth:"none"}}>
           <div className="my-10 text-center font-bold">Supporter</div>
           {payments.length==0 && "No Payment Found"}
           {payments && payments.map((data,index)=>{
@@ -135,7 +135,7 @@ return(
 ) 
           })}
         </div>
-        <div className="w-[40%] bg-purple-500 h-[80%] text-white">
+        <div className="max-md:w-[40%] w-[80%] bg-purple-500 h-[80%] text-white">
           <div className="w-[90%] m-auto">
             <div className="gap-10">
               <div className="my-4 mt-8 font-bold text-1xl">Make a Payment</div>
