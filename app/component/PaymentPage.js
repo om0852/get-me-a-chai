@@ -13,7 +13,7 @@ function PaymentPage({ params }) {
   const searchParams=useSearchParams();
   useEffect(() => {
     if (!session) {
-    //   router.push(`/login`);
+      router.push(`/login`);
     }
   }, [session, router]);
   useEffect(()=>{

@@ -7,10 +7,11 @@ import { fetchUser, updateUser } from '@/actions/useraction';
 function Page() {
     const router =useRouter();
     const { data: session } = useSession()
-    if(!session) {
-        // router.push(`/login`)
-
+    useEffect(()=>{
+      if(!session) {
+        router.push("/login");
     }
+    },[])
     const [form,setForm]=useState({
       name:"",
       email:"",

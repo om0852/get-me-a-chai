@@ -8,9 +8,10 @@ import { useSession, signIn, signOut } from "next-auth/react"
 
 import { fetchUser } from "@/actions/useraction";
 import Head from "next/head";
+import { useRouter } from "next/navigation";
 export default function Home() {
   const { data: session } = useSession()
-
+const router=useRouter()
   const [userData,setUserData]=useState(null)
   const getData=async()=>{
       
@@ -18,6 +19,9 @@ export default function Home() {
     setUserData(u)
   }
   useEffect(()=>{
+    if(!session){
+router.push("login")
+    }
 getData();
 
   },[])
