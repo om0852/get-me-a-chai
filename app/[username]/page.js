@@ -6,7 +6,7 @@ import PaymentPage from "../component/PaymentPage";
 import { fetchUserByName } from "@/actions/useraction";
 import { Elsie_Swash_Caps } from "next/font/google";
 
-function page({ params }) {
+function Page({ params }) {
   const router = useRouter();
   const { data: session } = useSession();
   const [state,setState]=useState(false);
@@ -26,4 +26,4 @@ useEffect(()=>{
   );
 }
 
-export default page;
+export default Page;

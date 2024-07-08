@@ -4,7 +4,7 @@ import { useSession, signIn, signOut } from "next-auth/react"
 import { useRouter } from "next/navigation";
 import { fetchUser, updateUser } from '@/actions/useraction';
 
-function page() {
+function Page() {
     const router =useRouter();
     const { data: session } = useSession()
     if(!session) {
@@ -83,4 +83,4 @@ if(session){
   )
 }
 
-export default page
+export default Page
