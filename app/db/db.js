@@ -4,6 +4,6 @@ const connectDB = async () => {
     if (mongoose.connection.readyState >= 1) {
       return;
     }
-    return mongoose.connect("mongodb://localhost:27017/chai");
+    return mongoose.connect(`${process.env.DB_URL}`);
   };
   export default connectDB;
