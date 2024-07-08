@@ -37,7 +37,7 @@ getData();
 </Head>
 {loaderState&& <Loader/>
 }  <div className="flex justify-center flex-col text-white h-[44vh] items-center gap-4 ">
-   <div className="font-bold text-3xl flex justify-center align-center">Buy Me a Chai<span className="mx-2"><img src={teaLogo.src} width={66}/></span></div>
+   <div className="font-bold text-3xl flex justify-center items-center">Buy Me a Chai<span className="mx-2"><img src={teaLogo.src} width={66}/></span></div>
    <div>
 
 <p className="w-[70%] m-auto text-center">
@@ -65,7 +65,7 @@ Yours Fans can buy a Chai
    <div className="bg-white h-1 opacity-10 my-14">
    </div>
    <div className="text-white container mx-auto">
-    <h1 className="text-center sm:text-left my-5 font-bold text-2xl" >
+    <h1 className="text-center max-md:text-center my-5 font-bold text-2xl" >
 Learn More About Us
     </h1>
     <div className=" gap-10 max-md:flex justify-around align-center items-center grid">
