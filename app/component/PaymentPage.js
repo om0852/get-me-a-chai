@@ -106,7 +106,7 @@ useEffect(()=>{
       {loaderState&& <Loader/>}
 
         <img
-          src={currentUser&&currentUser.cover_picture}
+          src={currentUser && currentUser.cover_picture==""?"https://marketplace.canva.com/EAE2cQaUHVA/1/0/1600w/canva-black-minimal-motivation-quote-linkedin-banner-HoRi-2buBWk.jpg":currentUser.cover_picture}
           className="w-full max-md:h-[350px] h-[220px]"
           alt="Cover"
         />
