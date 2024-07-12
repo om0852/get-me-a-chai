@@ -42,7 +42,7 @@ getData();
    <div>
 
 <p className="w-[70%] m-auto text-center">
-  A crowd funding platform ajkghdu akshfkah akjhdka
+  A crowd funding platform for tea lovers
  </p>
  </div>
    <div className="">
